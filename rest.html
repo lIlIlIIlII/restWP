@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Elenco Post WordPress</title>
+</head>
+<body>
+    <h1>Ultimi Post</h1>
+    <ul id="post-list"></ul>
+
+    <script>
+        fetch("https://demo.wp-api.org/wp-json/wp/v2/posts")
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById("post-list");
+                data.forEach(post => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<strong>${post.title.rendered}</strong><br>${post.excerpt.rendered}`;
+                    list.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error("Errore nel caricamento dei post:", error);
+            });
+    </script>
+</body>
+</html>
+
