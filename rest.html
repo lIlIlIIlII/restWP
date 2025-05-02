@@ -15,7 +15,7 @@
             .then(risposta => risposta.json()) 
             .then(dati => {
                 let elenco = document.getElementById("post");
-                // Per ogni post ricevuto
+               
                 for (let i = 0; i < dati.length; i++) {
                     let item = document.createElement("li");
                     item.innerHTML = dati[i].title.rendered;
