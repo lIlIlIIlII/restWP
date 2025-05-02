@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Elenco Post WordPress</title>
+    <title>Post da WordPress</title>
 </head>
 <body>
     <h1>Ultimi Post</h1>
-    <ul id="post-list"></ul>
+    <ul id="post"></ul>
 
     <script>
-        fetch("https://demo.wp-api.org/wp-json/wp/v2/posts")
-            .then(response => response.json())
-            .then(data => {
-                const list = document.getElementById("post-list");
-                data.forEach(post => {
-                    const li = document.createElement("li");
-                    li.innerHTML = `<strong>${post.title.rendered}</strong><br>${post.excerpt.rendered}`;
-                    list.appendChild(li);
-                });
-            })
-            .catch(error => {
-                console.error("Errore nel caricamento dei post:", error);
+        // URL dell'API di WordPress
+        let url = "https://demo.wp-api.org/wp-json/wp/v2/posts";
+
+        // Chiede i dati al server
+        fetch(url)
+            .then(risposta => risposta.json()) // Converte la risposta in JSON
+            .then(dati => {
+                let elenco = document.getElementById("post");
+                // Per ogni post ricevuto
+                for (let i = 0; i < dati.length; i++) {
+                    let item = document.createElement("li");
+                    item.innerHTML = dati[i].title.rendered; // Mostra il titolo
+                    elenco.appendChild(item); // Aggiunge alla lista
+                }
             });
     </script>
 </body>
 </html>
-
