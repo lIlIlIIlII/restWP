@@ -9,19 +9,17 @@
     <ul id="post"></ul>
 
     <script>
-        // URL dell'API di WordPress
         let url = "https://demo.wp-api.org/wp-json/wp/v2/posts";
 
-        // Chiede i dati al server
         fetch(url)
-            .then(risposta => risposta.json()) // Converte la risposta in JSON
+            .then(risposta => risposta.json()) 
             .then(dati => {
                 let elenco = document.getElementById("post");
                 // Per ogni post ricevuto
                 for (let i = 0; i < dati.length; i++) {
                     let item = document.createElement("li");
-                    item.innerHTML = dati[i].title.rendered; // Mostra il titolo
-                    elenco.appendChild(item); // Aggiunge alla lista
+                    item.innerHTML = dati[i].title.rendered;
+                    elenco.appendChild(item);
                 }
             });
     </script>
