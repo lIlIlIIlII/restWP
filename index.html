@@ -1,62 +1,31 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <title>Elenco Post NASA</title>
+</head>
+<body>
 
- 
+    <h1>Elenco Post NASA</h1>
 
+    <script>
+        let wpApiUrl = 'https://www.nasa.gov/wp-json/wp/v2/posts';
 
- 
+        function fetchPosts() {
+            fetch(wpApiUrl)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(posts) {
+                    posts.forEach(function(post) {
+                        var hElement = document.createElement('h2');
+                        hElement.textContent = post.title.rendered;  
+                        document.body.appendChild(hElement);
+                    });
+                });
+        }
 
-<html lang="en">
- 
+        window.onload = fetchPosts;
+    </script>
 
-    <head>
- 
-
-        <!-- Titolo scheda -->
- 
-
-        <title>Interrogazione REST</title>
- 
-
-        <!-- Meta -->
- 
-
-        <meta charset="UTF-8">
- 
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-
-        <!-- JS -->
- 
-
-        <script src="../js/REST_API_WP.js"></script>
- 
-
-        <!-- CSS -->
- 
-
-        <link rel="stylesheet" href="../css/REST_API_WP.css">
- 
-
-    </head>
- 
-
-    <body>
- 
-
-        <h1>Interrogazione REST</h1>
- 
-
-        <p>Interrogazione di una piattaforma WordPress tramite l'API REST.</p>
- 
-
-        <br>
- 
-
-        <table id="tabella"></table>
- 
-
-    </body>
- 
-
+</body>
 </html>
