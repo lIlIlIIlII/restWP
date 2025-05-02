@@ -1,33 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>Wordpress News</title>
+    <meta charset="UTF-8">
+    <title>Notizie TechCrunch</title>
 </head>
 <body>
 
-    <h1>Elenco Post</h1>
+    <h1>Ultimi Articoli</h1>
+
+    <div id="post-container"></div>
 
     <script>
-        let wpApiUrl = 'https://wordpress.org/news/';
+        const apiUrl = "https://techcrunch.com/wp-json/wp/v2/posts";
 
-        function fetchPosts() 
-        {
-            fetch(wpApiUrl)
-                .then(function(response) 
-                      {
-                    return response.json();
-                })
-                .then(function(posts) {
-                    posts.forEach(function(post) 
-                                  {
-                        var hElement = document.createElement('h2');
-                        hElement.textContent = post.title.rendered;  
-                        document.body.appendChild(hElement);
-                    });
-                });
+        async function caricaArticoli() {
+            try {
+                const risposta = await fetch(apiUrl);
+                const dati = await risposta.json();
+
+                const contenitore = document.getElementById("post-container");
+
+                for (let articolo of dati) {
+                    const titolo = document.createElement("h2");
+                    titolo.innerHTML = articolo.title.rendered;
+                    contenitore.appendChild(titolo);
+                }
+            } catch (errore) {
+                console.error("Errore nel caricamento:", errore);
+            }
         }
 
-        window.onload = fetchPosts;
+        window.addEventListener("DOMContentLoaded", caricaArticoli);
     </script>
 
 </body>
