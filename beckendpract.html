@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   xhr-test
+  </head>
+  <body>
+    <script> 
+        const xhr= new XMLHttpRequest();
+        
+
+        xhr.addEventListener('load' ,()=> {
+          const a = xhr.response
+          console.log(a);
+
+        });
+
+        xhr.open('GET','https://github.com/ferf12/xhr/blob/main/listaAnagrafica.xml' );
+        xhr.send();
+        
+
+    </script>
+  </body>
+</html>
