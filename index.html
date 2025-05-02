@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>Post da WordPress</title>
+    <meta charset="UTF-8">
 </head>
 <body>
-    <h1>Ultimi Post</h1>
-    <ul id="post"></ul>
+    <h1>Elenco dei post</h1>
+    <ul id="lista-post"></ul>
 
     <script>
-        // URL dell'API di WordPress
-        let url = "https://demo.wp-api.org/wp-json/wp/v2/posts";
+        // URL del sito WordPress (puoi cambiarlo con un altro)
+        const url = "https://demo.wp-api.org/wp-json/wp/v2/posts";
 
-        // Chiede i dati al server
         fetch(url)
-            .then(risposta => risposta.json()) // Converte la risposta in JSON
+            .then(risposta => risposta.json())
             .then(dati => {
-                let elenco = document.getElementById("post");
-                // Per ogni post ricevuto
+                const lista = document.getElementById("lista-post");
+
                 for (let i = 0; i < dati.length; i++) {
-                    let item = document.createElement("li");
-                    item.innerHTML = dati[i].title.rendered; // Mostra il titolo
-                    elenco.appendChild(item); // Aggiunge alla lista
+                    let elemento = document.createElement("li");
+                    elemento.innerHTML = dati[i].title.rendered;
+                    lista.appendChild(elemento);
                 }
             });
     </script>
 </body>
 </html>
-
